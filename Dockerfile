@@ -14,6 +14,14 @@ RUN julia -e 'using Plots'
 # RUN julia -e 'Pkg.add("PGFPlots")
 # RUN julia -e 'using PGFPlots'
 
+RUN apt-get -y install git-core make
+ENV PROJ /home/stephen/izh2004
+RUN mkdir -p $PROJ
+RUN git clone https://github.com/sje30/izh2004.git $PROJ
+
+WORKDIR $PROJ
+RUN make
+
 ## TO REBUILD
 #  docker build -t sje30/izh2004 .
 ## TO RUN
