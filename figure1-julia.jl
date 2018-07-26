@@ -6,6 +6,7 @@
 
 using Plots
 gr()
+ENV["GKS_WSTYPE"] = 140         #  ensure png output.
 
 ##fig, axes = subplots(5,4,figsize=(10,10))
 
