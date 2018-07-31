@@ -1,3 +1,4 @@
+## -*- docker-image-name: "sje30/izh2004" -*-
 FROM library/julia
 MAINTAINER Stephen Eglen <sje30@cam.ac.uk>
 RUN apt-get update
@@ -22,9 +23,20 @@ RUN git clone https://github.com/sje30/izh2004.git $PROJ
 WORKDIR $PROJ
 RUN make
 
+RUN mkdir codecheck
+
+RUN date > codecheck/date.txt
+RUN uname -a > codecheck/uname.txt
+RUN cp figure1.png codecheck
+
+
 ## TO REBUILD
 #  docker build -t sje30/izh2004 .
 ## TO RUN
-#  docker run -it sje30/izh2004 bash
+#  docker run --name road -it sje30/izh2004 bash
 
 # docker run -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v $HOME/.Xauthority:/home/stephen/.Xauthority --net=host amanral/ubuntu-firefox:rev1
+
+# docker cp road:/home/stephen/izh2004/codecheck/uname.txt /tmp
+# docker cp road:/home/stephen/izh2004/codecheck/figure1.png /tmp
+ 
